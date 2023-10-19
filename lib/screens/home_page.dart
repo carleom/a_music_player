@@ -14,6 +14,9 @@ import 'package:musify/widgets/playlist_cube.dart';
 import 'package:musify/widgets/song_bar.dart';
 import 'package:musify/widgets/spinner.dart';
 
+import 'package:http/http.dart' as http;
+import 'package:rss_dart/dart_rss.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -25,20 +28,43 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'A music player',
+          'A Music App',
           style: GoogleFonts.paytoneOne(color: colorScheme.primary),
         ),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _buildRSSFeed(),
+          ],
         ),
       ),
     );
   }
 
-  // Dont need this
-  Widget _buildSuggestedPlaylists() {
+  Widget _buildRSSFeed() {
+    final client = http.Client();
+
+    // RSS feed
+    client
+        .get(
+      Uri.parse(
+        'https://pitchfork.com/rss/reviews/best/albums/',
+      ),
+    )
+        .then((response) {
+      return response.body;
+    }).then((bodyString) {
+      final channel = RssFeed.parse(bodyString);
+      print(channel.title);
+      print(channel.author);
+      print(channel.copyright);
+      print(channel.description);
+      print(channel.docs);
+      return channel;
+    });
+
     return FutureBuilder(
       future: getPlaylists(playlistsNum: 5),
       builder: _buildSuggestedPlaylistsWidget,
