@@ -29,13 +29,14 @@ dependencies:
   hive_flutter: ^1.1.0
   html: ^0.15.4
   http: ^1.1.0
-  intl: ^0.18.0
+  intl: ^0.18.1
   just_audio: ^0.9.35
   path: ^1.8.3
   path_provider: ^2.1.1
   permission_handler: ^11.0.1
   receive_sharing_intent:
     path: ./packages/receive_sharing_intent
+  rss_dart: ^1.0.4
   rxdart: ^0.27.7
   url_launcher: ^6.1.14
   youtube_explode_dart: ^2.0.2
