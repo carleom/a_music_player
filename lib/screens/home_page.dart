@@ -25,22 +25,19 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Musify.',
+          'A music player',
           style: GoogleFonts.paytoneOne(color: colorScheme.primary),
         ),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _buildSuggestedPlaylists(),
-            _buildRecommendedSongsAndArtists(),
-          ],
         ),
       ),
     );
   }
 
+  // Dont need this
   Widget _buildSuggestedPlaylists() {
     return FutureBuilder(
       future: getPlaylists(playlistsNum: 5),
